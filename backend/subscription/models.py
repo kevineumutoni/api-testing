@@ -21,7 +21,9 @@ class SubscriptionBox(models.Model):
         on_delete=models.CASCADE,
         related_name='customer_subscriptions',
         limit_choices_to={'type': 'customer'},
-        help_text="User of type 'customer'"
+        help_text="User of type 'customer'",
+        null=True,  # Allow null for easier migrations
+        blank=True
     )
     vendor = models.ForeignKey(
         User,
@@ -29,6 +31,8 @@ class SubscriptionBox(models.Model):
         related_name='vendor_subscriptions',
         limit_choices_to={'type': 'vendor'},
         help_text="User of type 'vendor'",
+        null=True,
+        blank=True
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscription')
