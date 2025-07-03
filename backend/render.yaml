@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: django-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn backend.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: backend.settings
+      # Add your secret key and other envs here
+      - key: SECRET_KEY
+        value: "your-production-secret-key"
+      # If you use a postgres db with render, add DATABASE_URL here
